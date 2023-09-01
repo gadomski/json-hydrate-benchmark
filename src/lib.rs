@@ -80,7 +80,7 @@ fn pyo3<'a>(base: &PyAny, item: &'a PyAny) -> PyResult<&'a PyAny> {
                 Err(anyhow!("type mismatch").into())
             }
         } else {
-            Ok(item.into())
+            Ok(item)
         }
     }
 
@@ -113,7 +113,7 @@ fn pyo3<'a>(base: &PyAny, item: &'a PyAny) -> PyResult<&'a PyAny> {
                 item.set_item(key, base_value)?;
             }
         }
-        Ok(item.into())
+        Ok(item)
     }
 
     hydrate(base, item)
