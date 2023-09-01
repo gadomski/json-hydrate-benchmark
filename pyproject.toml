@@ -1,0 +1,26 @@
+[project]
+name = "json-hydrate-benchmark"
+version = "0.0.0"                                                                                             # this package is not meant for release
+authors = [{ name = "Pete Gadomski", email = "pete.gadomski@gmail.com" }]
+description = "Small hobby project to test the performance of Rust<->Python bindings for hydration in pgstac"
+readme = "README.md"
+requires-python = "~=3.11.0"
+license = { text = "Apache-2.0" }
+dynamic = ["dependencies", "optional-dependencies"]
+
+[build-system]
+requires = ["setuptools"]
+build-backend = "setuptools.build_meta"
+
+[tool.setuptools.dynamic]
+dependencies = { file = "requirements.txt" }
+optional-dependencies = { dev = { file = "requirements-dev.txt" } }
+
+[tool.mypy]
+strict = true
+
+[tool.ruff]
+include = ["F", "E", "I", "RUF"]
+
+[tool.isort]
+profile = "black"

@@ -1,0 +1,6 @@
+black
+mypy
+pip-tools
+pre-commit
+pytest
+ruff
