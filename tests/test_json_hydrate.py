@@ -10,15 +10,21 @@ pytestmark = pytest.mark.parametrize(
 
 
 @pytest.fixture
-def base() -> dict[str, str]:
+def base() -> dict[str, Any]:
     return {"a": "first", "b": "second", "c": "third"}
 
 
-def test_equal_hydrate(json_hydrate: JsonHydrate, base: dict[str, str]) -> None:
+def test_equal_hydrate(json_hydrate: JsonHydrate, base: dict[str, Any]) -> None:
     result = json_hydrate(base, base)
     assert result == base
 
 
-def test_full_hydrate(json_hydrate: JsonHydrate, base: dict[str, str]) -> None:
+def test_full_hydrate(json_hydrate: JsonHydrate, base: dict[str, Any]) -> None:
+    result = json_hydrate(base, {})
+    assert result == base
+
+
+def test_full_nested(json_hydrate: JsonHydrate, base: dict[str, Any]) -> None:
+    base["c"] = {"d": "third"}
     result = json_hydrate(base, {})
     assert result == base
