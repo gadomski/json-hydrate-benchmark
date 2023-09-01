@@ -9,6 +9,10 @@ def python(base: dict[str, Any], item: dict[str, Any]) -> dict[str, Any]:
     return _hydrate_dict(base, item)
 
 
+def base_item(collection: dict[str, Any]) -> dict[str, Any]:
+    return {"collection": collection["id"], "assets": collection["item_assets"]}
+
+
 def _hydrate_dict(base: dict[str, Any], item: dict[str, Any]) -> dict[str, Any]:
     for key, value in base.items():
         if key in item:
@@ -48,4 +52,4 @@ def _hydrate(base: Any, item: Any) -> Any:
         return item
 
 
-__all__ = ["python", "serde_json"]
+__all__ = ["python", "serde_json", "base_item"]

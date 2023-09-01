@@ -1,4 +1,6 @@
-from typing import Any, Callable
+import json
+from pathlib import Path
+from typing import Any, Callable, cast
 
 import json_hydrate_benchmark
 import pytest
@@ -12,6 +14,11 @@ pytestmark = pytest.mark.parametrize(
 @pytest.fixture
 def base() -> dict[str, Any]:
     return {"a": "first", "b": "second", "c": "third"}
+
+
+def load_json(path: Path) -> dict[str, Any]:
+    with open(Path(__file__).parent / "data" / path) as f:
+        return cast(dict[str, Any], json.load(f))
 
 
 def test_equal_hydrate(json_hydrate: JsonHydrate, base: dict[str, Any]) -> None:
@@ -68,3 +75,12 @@ def test_marked_non_merged_fields(json_hydrate: JsonHydrate) -> None:
         "b": "second",
         "c": {"d": "third", "f": "fifth"},
     }
+
+
+def test_landsat(json_hydrate: JsonHydrate) -> None:
+    collection = load_json(Path("landsat-c2-l1.json"))
+    base_item = json_hydrate_benchmark.base_item(collection)
+    dehydrated = load_json(Path("dehydrated") / "LM04_L1GS_001001_19830527_02_T2.json")
+    expected = load_json(Path("hydrated") / "LM04_L1GS_001001_19830527_02_T2.json")
+    actual = json_hydrate(base_item, dehydrated)
+    assert actual == expected
