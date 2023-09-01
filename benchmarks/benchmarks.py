@@ -17,3 +17,6 @@ class Landsat:
 
     def time_serde_json(self) -> None:
         json_hydrate_benchmark.serde_json(self.base, self.item)
+
+    def time_pyo3(self) -> None:
+        json_hydrate_benchmark.pyo3(self.base, self.item)

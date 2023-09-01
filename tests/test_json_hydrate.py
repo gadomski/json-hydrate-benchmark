@@ -7,7 +7,12 @@ import pytest
 
 JsonHydrate = Callable[[dict[str, Any], dict[str, Any]], dict[str, Any]]
 pytestmark = pytest.mark.parametrize(
-    "json_hydrate", [json_hydrate_benchmark.python, json_hydrate_benchmark.serde_json]
+    "json_hydrate",
+    [
+        json_hydrate_benchmark.python,
+        json_hydrate_benchmark.serde_json,
+        json_hydrate_benchmark.pyo3,
+    ],
 )
 
 

@@ -1,6 +1,6 @@
 from typing import Any
 
-from .json_hydrate_benchmark import serde_json
+from .json_hydrate_benchmark import pyo3, serde_json
 
 MAGIC_MARKER = "𒍟※"
 
@@ -52,4 +52,4 @@ def _hydrate(base: Any, item: Any) -> Any:
         return item
 
 
-__all__ = ["python", "serde_json", "base_item"]
+__all__ = ["python", "serde_json", "base_item", "pyo3"]
