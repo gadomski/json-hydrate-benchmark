@@ -22,7 +22,6 @@ features = ["pyo3/extension-module"]
 python-source = "python"
 
 [tool.maturin.dynamic]
-dependencies = { file = "requirements.txt" }
 optional-dependencies = { dev = { file = "requirements-dev.txt" } }
 
 [tool.mypy]
