@@ -3,6 +3,5 @@
 set -e
 
 pip-compile --strip-extras requirements-dev.in
-pip-compile --strip-extras requirements.in
-pip-sync requirements.txt requirements-dev.txt
+pip-sync requirements-dev.txt
 pip install -e .
