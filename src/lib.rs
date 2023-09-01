@@ -87,7 +87,7 @@ fn pyo3<'a>(base: &PyAny, item: &'a PyAny) -> PyResult<&'a PyAny> {
     fn hydrate_list<'a>(base: &PyList, item: &'a PyList) -> PyResult<&'a PyList> {
         for i in 0..item.len() {
             if i >= base.len() {
-                return Ok(item.into());
+                return Ok(item);
             } else {
                 item.set_item(i, hydrate(&base[i], &item[i])?)?;
             }
