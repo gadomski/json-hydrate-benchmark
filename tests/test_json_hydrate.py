@@ -53,3 +53,18 @@ def test_list_of_dicts_extra_keys(json_hydrate: JsonHydrate) -> None:
             "boo",
         ],
     }
+
+
+def test_marked_non_merged_fields(json_hydrate: JsonHydrate) -> None:
+    base = {
+        "a": "first",
+        "b": "second",
+        "c": {"d": "third", "e": "fourth"},
+    }
+    item = {"c": {"e": "𒍟※", "f": "fifth"}}
+    result = json_hydrate(base, item)
+    assert result == {
+        "a": "first",
+        "b": "second",
+        "c": {"d": "third", "f": "fifth"},
+    }

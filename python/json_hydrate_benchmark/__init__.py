@@ -2,6 +2,8 @@ from typing import Any
 
 from .json_hydrate_benchmark import serde_json
 
+MAGIC_MARKER = "𒍟※"
+
 
 def python(base: dict[str, Any], item: dict[str, Any]) -> dict[str, Any]:
     return _hydrate_dict(base, item)
@@ -10,7 +12,10 @@ def python(base: dict[str, Any], item: dict[str, Any]) -> dict[str, Any]:
 def _hydrate_dict(base: dict[str, Any], item: dict[str, Any]) -> dict[str, Any]:
     for key, value in base.items():
         if key in item:
-            item[key] = _hydrate(value, item[key])
+            if item[key] == MAGIC_MARKER:
+                del item[key]
+            else:
+                item[key] = _hydrate(value, item[key])
         else:
             item[key] = value
     return item
