@@ -1,4 +1,5 @@
 black
+maturin
 mypy
 pip-tools
 pre-commit

@@ -1,0 +1,11 @@
+[package]
+name = "json-hydrate-benchmark"
+version = "0.0.0"
+edition = "2021"
+
+[lib]
+name = "json_hydrate_benchmark"
+crate-type = ["cdylib"]
+
+[dependencies]
+pyo3 = "0.19.0"

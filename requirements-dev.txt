@@ -22,6 +22,8 @@ identify==2.5.27
     # via pre-commit
 iniconfig==2.0.0
     # via pytest
+maturin==1.2.3
+    # via -r requirements-dev.in
 mypy==1.5.1
     # via -r requirements-dev.in
 mypy-extensions==1.0.0
