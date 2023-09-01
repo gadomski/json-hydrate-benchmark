@@ -39,3 +39,17 @@ def test_nested_exta_keys(json_hydrate: JsonHydrate, base: dict[str, Any]) -> No
         "b": "second",
         "c": {"d": "third", "e": "fourth", "f": "fifth"},
     }
+
+
+def test_list_of_dicts_extra_keys(json_hydrate: JsonHydrate) -> None:
+    base = {"a": [{"b1": 1, "b2": 2}, "foo", {"c1": 1, "c2": 2}, "bar"]}
+    item = {"a": [{"b3": 3}, "far", {"c3": 3}, "boo"]}
+    result = json_hydrate(base, item)
+    assert result == {
+        "a": [
+            {"b1": 1, "b2": 2, "b3": 3},
+            "far",
+            {"c1": 1, "c2": 2, "c3": 3},
+            "boo",
+        ],
+    }

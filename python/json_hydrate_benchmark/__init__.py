@@ -16,10 +16,16 @@ def _hydrate_dict(base: dict[str, Any], item: dict[str, Any]) -> dict[str, Any]:
     return item
 
 
-def _hydrate_list_or_tuple(
-    base: list[Any] | tuple[Any, ...], item: list[Any] | tuple[Any, ...]
-) -> list[Any] | tuple[Any, ...]:
-    raise NotImplementedError
+def _hydrate_list(
+    base: list[Any],
+    item: list[Any],
+) -> list[Any]:
+    for i in range(len(item)):
+        if i >= len(base):
+            return item
+        else:
+            item[i] = _hydrate(base[i], item[i])
+    return item
 
 
 def _hydrate(base: Any, item: Any) -> Any:
@@ -30,7 +36,7 @@ def _hydrate(base: Any, item: Any) -> Any:
             raise ValueError(f"base is not a dict: {type(base)}")
     elif isinstance(item, (list, tuple)):
         if isinstance(base, (list, tuple)):
-            return _hydrate_list_or_tuple(base, item)
+            return _hydrate_list(list(base), list(item))
         else:
             raise ValueError(f"base is not a list or tuple: {type(base)}")
     else:
