@@ -28,3 +28,14 @@ def test_full_nested(json_hydrate: JsonHydrate, base: dict[str, Any]) -> None:
     base["c"] = {"d": "third"}
     result = json_hydrate(base, {})
     assert result == base
+
+
+def test_nested_exta_keys(json_hydrate: JsonHydrate, base: dict[str, Any]) -> None:
+    base["c"] = {"d": "third"}
+    item = {"c": {"e": "fourth", "f": "fifth"}}
+    result = json_hydrate(base, item)
+    assert result == {
+        "a": "first",
+        "b": "second",
+        "c": {"d": "third", "e": "fourth", "f": "fifth"},
+    }

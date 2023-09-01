@@ -8,6 +8,7 @@ name = "json_hydrate_benchmark"
 crate-type = ["cdylib"]
 
 [dependencies]
-pyo3 = "0.19.0"
+anyhow = "1"
+pyo3 = { version = "0.19.0", features = ["anyhow"] }
 pythonize = "0.19"
 serde_json = "1"
