@@ -2,7 +2,7 @@ use pyo3::prelude::*;
 
 #[pyfunction]
 fn serde_json(base: &PyAny, item: &PyAny) -> PyResult<Py<PyAny>> {
-    Ok(item.into())
+    Ok(base.into())
 }
 
 #[pymodule]

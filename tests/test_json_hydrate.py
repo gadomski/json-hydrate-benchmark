@@ -17,3 +17,8 @@ def base() -> dict[str, str]:
 def test_equal_hydrate(json_hydrate: JsonHydrate, base: dict[str, str]) -> None:
     result = json_hydrate(base, base)
     assert result == base
+
+
+def test_full_hydrate(json_hydrate: JsonHydrate, base: dict[str, str]) -> None:
+    result = json_hydrate(base, {})
+    assert result == base
